@@ -16790,3 +16790,33 @@ ul {
   color: var(--bs-dark);
   background-color: var(--bs-white);
 }/*# sourceMappingURL=styles.css.map */
+
+.img_resize {
+  width: 200px !important;
+}
+.img-fluid{
+  z-index: 2 !important;
+}
+.adelantar  {
+  z-index: 999 !important;
+}
+
+ul.servicios {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  ul.servicios li {
+    background: #f0f4f8;
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.3s ease;
+  }
+  ul.servicios li:hover {
+    background: #d0e2ff;
+  }
