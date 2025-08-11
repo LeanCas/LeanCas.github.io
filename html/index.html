@@ -847,25 +847,54 @@
               <p class="mb-0 fs-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">¡Colaboremos y creemos algo increíble! Cuéntame sobre tu proyecto, estoy aquí para escucharte.</p>
             </div>
             <div class="col-xl-8">
-              <form class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                <div>
-                  <input type="text" class="form-control border-bottom border-dark" id="formGroupExampleInput"
-                    placeholder="Nombre">
-                </div>
-                <div>
-                  <input type="email" class="form-control border-bottom border-dark" id="exampleInputEmail1"
-                    placeholder="Email" aria-describedby="emailHelp">
-                </div>
-                <div>
-                  <textarea class="form-control border-bottom border-dark" id="exampleFormControlTextarea1"
-                    placeholder="Cuéntanos sobre tu proyecto" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn w-100 justify-content-center">
-                  <span class="btn-text">Enviar mensaje</span>
-                  <iconify-icon icon="lucide:arrow-up-right"
-                    class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                </button>
-              </form>
+              <form 
+  class="d-flex flex-column gap-7" 
+  action="https://formspree.io/f/xldlaapl" 
+  method="POST" 
+  data-aos="fade-up" 
+  data-aos-delay="200" 
+  data-aos-duration="1000"
+>
+  <div>
+    <input 
+      type="text" 
+      name="Nombre" 
+      class="form-control border-bottom border-dark" 
+      id="formGroupExampleInput" 
+      placeholder="Nombre" 
+      required
+    >
+  </div>
+  <div>
+    <input 
+      type="email" 
+      name="Email" 
+      class="form-control border-bottom border-dark" 
+      id="exampleInputEmail1" 
+      placeholder="Email" 
+      aria-describedby="emailHelp" 
+      required
+    >
+  </div>
+  <div>
+    <textarea 
+      name="Proyecto" 
+      class="form-control border-bottom border-dark" 
+      id="exampleFormControlTextarea1" 
+      placeholder="Cuéntanos sobre tu proyecto" 
+      rows="3" 
+      required
+    ></textarea>
+  </div>
+  <button type="submit" class="btn w-100 justify-content-center">
+    <span class="btn-text">Enviar mensaje</span>
+    <iconify-icon 
+      icon="lucide:arrow-up-right"
+      class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"
+    ></iconify-icon>
+  </button>
+</form>
+
             </div>
           </div>
         </div>
