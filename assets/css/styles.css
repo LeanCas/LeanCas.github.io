@@ -16794,9 +16794,7 @@ ul {
 .img_resize {
   width: 200px !important;
 }
-.img-fluid{
-  z-index: 2 !important;
-}
+
 .adelantar  {
   z-index: 999 !important;
 }
