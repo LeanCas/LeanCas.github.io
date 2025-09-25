@@ -16818,3 +16818,29 @@ ul.servicios {
   ul.servicios li:hover {
     background: #d0e2ff;
   }
+
+  #whatsapp-float{
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 64px;
+    height: 64px;
+    background-color: #25D366; /* whatsapp green */
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 9999;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #whatsapp-float svg{ width: 32px; height: 32px; color: #fff; }
+  @media (max-width: 576px){
+    #whatsapp-float{ right: 14px; bottom: 14px; width:56px; height:56px; }
+  }
+
+  #whatsapp-float:hover{
+   transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  }
