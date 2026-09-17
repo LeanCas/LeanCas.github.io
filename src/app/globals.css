@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   HOTY. design tokens
+   Base: carbon / white / paper. Accent: green. Green is never a surface.
+------------------------------------------------------------------- */
+@theme {
+  --color-green: #16c784;
+  --color-green-bright: #3ee0a1;
+  --color-green-ink: #0a7a52; /* green for text on light backgrounds (AA) */
+  --color-green-deep: #073b2a;
+  --color-mint: #eafbf4;
+
+  --color-carbon: #0e1110;
+  --color-carbon-2: #161a19;
+  --color-carbon-3: #1f2523;
+  --color-graphite: #5b625f;
+  --color-ash: #9aa19e;
+  --color-line: #e5e9e7;
+  --color-line-dark: #2a302e;
+  --color-paper: #fafcfb;
+  --color-white: #ffffff;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s var(--ease-out-quart) infinite;
+
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgb(22 199 132 / 0.55); }
+    70% { box-shadow: 0 0 0 8px rgb(22 199 132 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(22 199 132 / 0); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-carbon);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-green);
+    color: var(--color-carbon);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .container-x { padding-inline: 40px; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    font-weight: 600;
+  }
+
+  .hairline-grid {
+    background-image:
+      linear-gradient(to right, rgb(14 17 16 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(14 17 16 / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .hairline-grid-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Hero line reveal — pure CSS so it runs before hydration (good LCP).
+------------------------------------------------------------------- */
+/* The H1 is the LCP element: it renders immediately, no entrance animation. */
+.line-mask {
+  display: block;
+}
+.line-mask > span {
+  display: block;
+}
+.fade-up {
+  animation: fade-up 0.9s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* ------------------------------------------------------------------
+   Scroll reveal. Only hides content once JS has flagged <html class="js">,
+   so content stays visible without JavaScript.
+------------------------------------------------------------------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 1.1s var(--ease-out-expo);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+.js [data-reveal="fade"] { transform: none; }
+.js [data-reveal="scale"] { transform: scale(0.97) translate3d(0, 20px, 0); }
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.marquee-track {
+  animation: var(--animate-marquee);
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  .marquee-track { animation: none; }
+}

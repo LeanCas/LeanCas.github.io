@@ -1,5 +1,17 @@
+# dependencies
 node_modules/
-.impeccable/review/
-.impeccable/hook.cache.json
+
+# next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# env
+.env*
+!.env.example
+
+# misc
 .DS_Store
 Thumbs.db
+npm-debug.log*

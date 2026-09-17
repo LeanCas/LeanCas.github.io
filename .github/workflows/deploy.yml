@@ -1,0 +1,75 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build static export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Validate /out
+        run: |
+          set -euo pipefail
+          test -f out/index.html || { echo "::error::out/index.html missing"; exit 1; }
+          test -f out/404.html || { echo "::error::out/404.html missing"; exit 1; }
+          test -f out/CNAME || { echo "::error::out/CNAME missing"; exit 1; }
+          test "$(tr -d '[:space:]' < out/CNAME)" = "hoty.com.ar" || { echo "::error::CNAME content changed"; exit 1; }
+          for f in brand/logo-dark.svg brand/logo-light.svg brand/favicon.svg brand/og-brand.png robots.txt sitemap.xml; do
+            test -f "out/$f" || { echo "::error::out/$f missing"; exit 1; }
+          done
+          grep -q "studio.hoty@gmail.com" out/index.html || { echo "::error::contact email missing"; exit 1; }
+          grep -q "+54 381 4594146" out/index.html || { echo "::error::contact phone missing"; exit 1; }
+          touch out/.nojekyll
+          echo "out/ is valid"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
