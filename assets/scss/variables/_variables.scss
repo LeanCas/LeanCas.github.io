@@ -2,26 +2,33 @@
 // Variables Style
 // ----------------------------------------------
 
-// colors
-$white: #fff !default;
-$gray-100: rgba(31, 42, 46, 0.12) !default;
-$gray-200: #F4F8FA !default;
-$gray-300: rgba(31, 42, 46, 0.6) !default;
-$gray-400: rgba(31, 42, 46, 0.7) !default;
-$gray-500: #1F2A2E !default;
+// colors — HOTY. brand palette
+$white: #FFFFFF !default;
+$gray-100: rgba(16, 19, 18, 0.12) !default;
+$gray-200: #EAFBF4 !default; // Mint Background
+$gray-300: #626866 !default; // Graphite
+$gray-400: #626866 !default; // Graphite
+$gray-500: #101312 !default; // Carbon
 $black: #000 !default;
 
 // Color
-$blue: #C1FF72 !default;
+$blue: #16C784 !default; // Emerald Tech
 
 // Main Colors
 $primary: $blue !default;
-$secondary: #1f2a2e !default;
+$secondary: #073B2A !default; // Deep Green
 $light: $gray-100 !default;
 $muted: $gray-300 !default;
 $dark: $gray-500 !default;
 $dark-light: $gray-400 !default;
-$light-gray: $gray-200 !default; 
+$light-gray: $gray-200 !default;
+
+// Named aliases (brand palette reference)
+$emerald-tech: $blue !default;
+$deep-green: $secondary !default;
+$mint-bg: $gray-200 !default;
+$carbon: $gray-500 !default;
+$graphite: $gray-400 !default;
 
 // Theme Colorss
 $theme-colors: (
@@ -143,7 +150,7 @@ $line-height-sm: 1.25 !default;
 $line-height-lg: 2 !default;
 
 // Body
-$body-bg: $white !default;
+$body-bg: #FAFCFB !default; // Off White
 $body-color: $gray-400 !default;
 
 // Heading
@@ -151,7 +158,7 @@ $headings-color: $dark !default;
 $headings-font-weight: 700 !default;
 
 // Border Color
-$border-color: rgba(31, 42, 46, 0.12) !default;
+$border-color: #E5E9E7 !default;
 
 
 // Box Shadow

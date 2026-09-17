@@ -1,26 +1,7 @@
-# Studiova - Free Bootstrap Business Template
-#### Preview
+# HOTY.
 
- - [Demo](https://themewagon.github.io/Studiova/)
+Sitio web de HOTY., agencia de diseño y desarrollo web (San Miguel de Tucumán, Argentina).
 
-#### Download
- - [Download from ThemeWagon]()
-
-## Getting Started
-
-Clone Repository
-```
-git clone https://github.com/themewagon/Studiova.git
-```
-
-## Author 
-```
-Design and code is completely written by WrapPixel design and development team.  
-```
-
-## License
-
- - Design and Code is Copyright &copy; [WrapPixel](https://www.wrappixel.com/)
- - Licensed cover under [MIT] 
- - Distributed by [ThemeWagon](https://themewagon.com)
-
+- Sitio: `html/index.html` (una sola página con secciones ancla: Inicio, Sobre Hoty., Proyectos, Servicios, Contacto)
+- Stack: HTML + Bootstrap + SCSS (compilado en `assets/css/styles.css`), sin build tooling
+- Contacto: studio.hoty@gmail.com

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-16T00:00:00Z",
+  "title": "Design System: HOTY.",
+  "extensions": {
+    "colorMeta": {
+      "emerald-tech": { "role": "primary", "displayName": "Emerald Tech", "canonical": "#16C784", "tonalRamp": ["#052014", "#0A3B26", "#0F5637", "#147049", "#16C784", "#4DD9A2", "#8EE9C4", "#D6F8E9"] },
+      "deep-green": { "role": "secondary", "displayName": "Deep Green", "canonical": "#073B2A", "tonalRamp": ["#020F0A", "#041F16", "#062E20", "#073B2A", "#0E5A3F", "#187D57", "#3FA57C", "#9FD4BC"] },
+      "carbon": { "role": "neutral", "displayName": "Carbon", "canonical": "#101312", "tonalRamp": ["#000000", "#0A0C0B", "#101312", "#1C201F", "#2E3432", "#484F4D", "#6D7573", "#9AA19F"] },
+      "mint-background": { "role": "neutral", "displayName": "Mint Background", "canonical": "#EAFBF4", "tonalRamp": ["#0F5637", "#3B8F6B", "#7CC5A3", "#B3E4CE", "#D6F3E6", "#EAFBF4", "#F3FDF9", "#FAFEFC"] },
+      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "#626866", "tonalRamp": ["#101312", "#26292A", "#3D4140", "#54595A", "#626866", "#7E837F", "#A3A7A2", "#CACDC9"] },
+      "hairline-border": { "role": "neutral", "displayName": "Hairline Border", "canonical": "#E5E9E7", "tonalRamp": ["#8C948F", "#A6ADA8", "#C1C7C3", "#D3D8D5", "#E5E9E7", "#EEF1EF", "#F5F7F6", "#FBFCFB"] },
+      "off-white": { "role": "neutral", "displayName": "Off White", "canonical": "#FAFCFB", "tonalRamp": ["#D8DDDB", "#E4E8E6", "#EFF2F0", "#F5F8F6", "#FAFCFB", "#FBFDFC", "#FCFEFD", "#FFFFFF"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#FFFFFF", "tonalRamp": ["#CCCCCC", "#DDDDDD", "#EEEEEE", "#F5F5F5", "#FAFAFA", "#FCFCFC", "#FEFEFE", "#FFFFFF"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero 'Hoty.' wordmark only; tight -0.03em tracking, letter-by-letter boot animation." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings across all sections." },
+      "title": { "displayName": "Title", "purpose": "Service-row titles and wall-tile project names." },
+      "body": { "displayName": "Body", "purpose": "Section intros, descriptions, testimonial and FAQ prose." },
+      "label": { "displayName": "Label", "purpose": "Feature tags and wall-tile service badges; not a kicker, not uppercase." }
+    },
+    "shadows": [
+      { "name": "wall-tile-hover", "value": "0 24px 48px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(22,199,132,0.25)", "purpose": "Hover/focus-within lift on portfolio wall tiles only; depth is spent on proof, not decoration." },
+      { "name": "icon-button-ambient", "value": "0px 6px 8px -6px rgba(0,0,0,0.15)", "purpose": "Resting shadow on small circular icon buttons (CTA arrow chip, scroll-to-top)." }
+    ],
+    "motion": [
+      { "name": "hero-letter-in", "value": "0.7s cubic-bezier(0.16, 1, 0.3, 1), staggered 60ms per letter", "purpose": "Signature boot beat: the 'Hoty.' wordmark assembles letter by letter on first paint; skipped (shown fully assembled) under prefers-reduced-motion." },
+      { "name": "tile-lift", "value": "0.45s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Wall tile translateY(-10px) scale(1.045) on hover/focus-within." },
+      { "name": "pointer-glow", "value": "radial-gradient(220px circle at var(--gx,50%) var(--gy,50%), rgba(22,199,132,0.35), transparent 65%)", "purpose": "Ambient glow trail on wall tiles, position driven by --gx/--gy set from pointermove in assets/js/custom.js." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "540px" },
+      { "name": "md", "value": "720px" },
+      { "name": "lg", "value": "960px" },
+      { "name": "xl", "value": "1140px" },
+      { "name": "xxl", "value": "1680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (icon-chip pill)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Bordered pill label paired with a white circular arrow-icon chip; the system's only button form, used for hero CTA and form submit.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\"><span>Ver proyectos</span><span class=\"ds-btn-icon\">&#8599;</span></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 12px; padding: 4px 4px 4px 24px; border-radius: 56px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #FFFFFF; font-weight: 700; font-family: 'Manrope', sans-serif; text-decoration: none; transition: border-color 0.3s ease; } .ds-btn-primary .ds-btn-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; color: #101312; box-shadow: 0px 6px 8px -6px rgba(0,0,0,0.15); } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { border-color: #16C784; outline: none; } .ds-btn-primary:focus-visible { outline: 2px solid #16C784; outline-offset: 3px; }"
+    },
+    {
+      "name": "Portfolio Wall Tile",
+      "kind": "custom",
+      "refersTo": "wall-tile",
+      "description": "Signature component: a 3:4 image tile in a horizontal-scroll row with pointer-tracked ambient glow, lift+scale, and reveal-on-hover project info.",
+      "html": "<a class=\"ds-wall-tile\" href=\"#\"><img src=\"\" alt=\"Project\"><span class=\"ds-wall-scrim\"></span><span class=\"ds-wall-body\"><span class=\"ds-wall-title\">Marea Blanca</span><span class=\"ds-wall-link\">Ver proyecto &#8599;</span></span></a>",
+      "css": ".ds-wall-tile { position: relative; display: block; width: 300px; aspect-ratio: 3/4; overflow: hidden; border-radius: 4px; border: 1px solid rgba(255,255,255,0.12); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease; } .ds-wall-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); } .ds-wall-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,19,18,0) 45%, rgba(16,19,18,0.92) 100%); } .ds-wall-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; color: #FFFFFF; transform: translateY(2.6rem); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); } .ds-wall-link { display: block; margin-top: 8px; color: #16C784; font-weight: 700; opacity: 0; transition: opacity 0.3s ease; } .ds-wall-tile:hover, .ds-wall-tile:focus-visible { transform: translateY(-10px) scale(1.045); border-color: #16C784; box-shadow: 0 24px 48px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(22,199,132,0.25); } .ds-wall-tile:hover img { transform: scale(1.06); } .ds-wall-tile:hover .ds-wall-body { transform: translateY(0); } .ds-wall-tile:hover .ds-wall-link { opacity: 1; }"
+    },
+    {
+      "name": "Feature Tag",
+      "kind": "chip",
+      "refersTo": "feature-tag",
+      "description": "Hairline-bordered pill tag used under service descriptions to list sub-capabilities.",
+      "html": "<span class=\"ds-feature-tag\">Logotipos</span>",
+      "css": ".ds-feature-tag { display: inline-block; border: 1px solid #E5E9E7; border-radius: 999px; padding: 6px 16px; font-size: 14px; font-family: 'Manrope', sans-serif; color: #626866; }"
+    },
+    {
+      "name": "Contact Input",
+      "kind": "input",
+      "refersTo": "input-underline",
+      "description": "Borderless, bottom-hairline-only text input used in the dark contact form.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Nombre\">",
+      "css": ".ds-input { display: block; width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; font-size: 20px; font-family: 'Manrope', sans-serif; padding: 16px 0; } .ds-input::placeholder { color: rgba(255,255,255,0.45); } .ds-input:focus { outline: none; border-bottom-color: #16C784; }"
+    },
+    {
+      "name": "Service Row",
+      "kind": "custom",
+      "refersTo": "service-row",
+      "description": "Hairline-divided two-column row (icon+title / description+tags) replacing a boxed card as the services list primitive.",
+      "html": "<div class=\"ds-service-row\"><div class=\"ds-service-title\">Identidad de Marca</div><div class=\"ds-service-body\">Construimos identidades sólidas y auténticas.</div></div>",
+      "css": ".ds-service-row { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 48px; align-items: baseline; padding-block: 56px; border-bottom: 1px solid #E5E9E7; } .ds-service-title { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 28px; color: #101312; transition: color 0.3s ease; } .ds-service-row:hover .ds-service-title { color: #16C784; } .ds-service-body { font-family: 'Manrope', sans-serif; font-size: 18px; color: #101312; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Live Client Wall",
+    "overview": "HOTY. is a dark, editorial single-page pitch built around one conviction: proof outscores promise. The page opens on a full-bleed Carbon hero with an oversized \"Hoty.\" wordmark that assembles itself letter by letter, then hands off directly into a horizontally-scrolling wall of the studio's 7 real shipped sites — no genre rows, no invented categories, because there's no evidence to split across them. Between the dark hero/wall open and the dark contact/footer close, the middle third (services, credibility, FAQ) shifts to quiet light counterpoints so the two dark bookends read as a deliberate frame rather than monotony. Manrope carries every weight in the system at editorial scale, with the hero wordmark's negative tracking as the system's one signature type move. There is no numbered-badge, kicker, or eyebrow system anywhere on the page — an earlier draft called for one, it was never built, and the correction lives in the surface brief, not here.",
+    "keyCharacteristics": [
+      "Full-bleed Carbon dark ground bookending a light-ground middle (services/FAQ)",
+      "A single accent (Emerald Tech) reserved for interactive/proof signals only",
+      "Manrope at extreme scale contrast: 128px display wordmark down to 14px tag labels",
+      "One authored motion signature: letter-by-letter hero assembly + pointer-tracked ambient tile glow",
+      "Real content only — no stat cards, no invented case studies, no kicker labels"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Emerald Tech is the only chromatic accent in the system. It never appears as a large fill — only as border, glow, link, icon, or inline emphasis.", "section": "colors" },
+      { "name": "The Bookend Rule", "body": "Dark ground opens (hero, wall) and dark ground closes (contact, footer); the light middle (services, FAQ) is the counterpoint, not the default.", "section": "colors" },
+      { "name": "The No-Kicker Rule", "body": "No heading in this system is preceded by an eyebrow, badge, or numbered label. This is a hard prohibition carried from the craft floor, not a task-specific choice.", "section": "typography" },
+      { "name": "The Flat-Until-Proof Rule", "body": "Surfaces stay flat at rest. Depth (shadow + lift + glow) is spent exclusively on the portfolio wall's hover/focus state.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do hold Emerald Tech (#16C784) as the only accent — border/glow, link, icon, and inline stat emphasis, never a large fill.",
+      "Do reserve depth (shadow + lift + glow) for the wall tile's hover/focus state; keep everything else flat.",
+      "Do keep the hero wordmark's tight tracking (-0.03em) as the system's one display-type signature; don't apply it elsewhere.",
+      "Do show only real content: 7 real projects, 1 real testimonial, 3 confirmed stats (98.6% / 100+ / 20+) folded into prose. Never add a stat-card grid or invent a project.",
+      "Do keep the dark hero/wall open and dark contact/footer close bookending a light services/FAQ middle."
+    ],
+    "donts": [
+      "Don't add a kicker, eyebrow, or numbered-badge (\"01/02/03\") above any heading — banned outright by the craft floor, not earned back by any brief.",
+      "Don't split the portfolio wall into genre rows or invented categories; there are 7 real projects and one row.",
+      "Don't introduce a second accent color or a solid-fill primary button; the system's only interactive fill on dark ground is white, and the only chromatic color is Emerald Tech used sparingly.",
+      "Don't mix icon families — one consistent lucide stroke icon set system-wide (unified in this build's fix round after an earlier solar/lucide mix).",
+      "Don't add a stat-card grid (\"hero-metric template\") for the confirmed numbers; they stay folded into testimonial prose as .stat-inline emphasis."
+    ]
+  }
+}

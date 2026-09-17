@@ -1,0 +1,363 @@
+// ----------------------------------------------
+// HOTY. homepage — dark editorial redesign
+// ----------------------------------------------
+
+// Browser surfaces carry the system too (selection, scrollbar, focus ring)
+::selection {
+    background-color: var(--bs-primary);
+    color: var(--bs-secondary);
+}
+
+:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 3px;
+}
+
+// ---------- Hero ----------
+.hero {
+    min-height: 100svh;
+    background-color: $dark;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(180deg, rgba($dark, 0.35) 0%, rgba($dark, 0.75) 100%);
+    }
+
+    .hero-video {
+        filter: saturate(0.9) brightness(0.8);
+    }
+}
+
+.hero-word {
+    display: inline-flex;
+    flex-wrap: wrap;
+    letter-spacing: -0.03em;
+
+    .hero-letter {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(0.4em);
+        animation: hero-letter-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: calc(var(--i) * 60ms + 150ms);
+    }
+}
+
+@keyframes hero-letter-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-letter {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+.hero-kicker-line {
+    max-width: 46ch;
+}
+
+// ---------- Portfolio wall ----------
+.wall {
+    background-color: $dark;
+}
+
+.wall-heading {
+    max-width: 62ch;
+}
+
+.wall-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bs-primary) rgba($white, 0.08);
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba($white, 0.08);
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--bs-primary);
+        border-radius: 8px;
+    }
+
+    @include media-breakpoint-down(md) {
+        scroll-snap-type: x mandatory;
+    }
+}
+
+.wall-tile {
+    position: relative;
+    flex: 0 0 auto;
+    width: 300px;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 4px;
+    scroll-snap-align: start;
+    border: 1px solid rgba($white, 0.12);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, opacity 0.3s ease;
+
+    // Ambient pointer-glow: a soft trailing light on the focused tile, updated from JS via --gx/--gy
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0;
+        background: radial-gradient(220px circle at var(--gx, 50%) var(--gy, 50%), rgba($primary, 0.35), transparent 65%);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    @include media-breakpoint-up(lg) {
+        width: 340px;
+    }
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wall-tile-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(180deg, rgba($dark, 0) 45%, rgba($dark, 0.92) 100%);
+    }
+
+    .wall-tile-body {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 20px;
+        transform: translateY(2.6rem);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wall-tile-tags {
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .wall-tile-link {
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    // Touch devices have no hover: show the tile's story at rest instead of gating it behind a state that can never fire.
+    @media (hover: none) {
+        .wall-tile-body {
+            transform: translateY(0);
+        }
+
+        .wall-tile-tags {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wall-tile-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (hover: hover) {
+
+        &:hover,
+        &:focus-within {
+            transform: translateY(-10px) scale(1.045);
+            z-index: 2;
+            border-color: var(--bs-primary);
+            box-shadow: 0 24px 48px -20px rgba($black, 0.6), 0 0 0 1px rgba($primary, 0.25);
+
+            &::after {
+                opacity: 1;
+            }
+
+            img {
+                transform: scale(1.06);
+            }
+
+            .wall-tile-body {
+                transform: translateY(0);
+            }
+
+            .wall-tile-tags {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .wall-tile-link {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+
+    &:focus-within {
+        border-color: var(--bs-primary);
+    }
+}
+
+@media (hover: hover) {
+    .wall-track:hover .wall-tile:not(:hover):not(:focus-within) {
+        opacity: 0.55;
+    }
+}
+
+// ---------- Services ----------
+.services-list {
+    border-top: 1px solid var(--bs-border-color);
+    padding-inline: 4px;
+
+    @include media-breakpoint-up(md) {
+        padding-inline: 0;
+    }
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 40px;
+    border-bottom: 1px solid var(--bs-border-color);
+    transition: background-color 0.3s ease;
+
+    @include media-breakpoint-up(lg) {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 48px;
+        align-items: baseline;
+        padding-block: 56px;
+    }
+
+    &:hover {
+        .service-row-title {
+            color: var(--bs-primary);
+        }
+
+        .service-row-mark {
+            transform: translateX(6px);
+        }
+    }
+}
+
+.service-row-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.3s ease;
+
+    iconify-icon {
+        flex-shrink: 0;
+    }
+}
+
+.service-row-mark {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-tags {
+    .feature-tag {
+        border: 1px solid var(--bs-border-color);
+        border-radius: 999px;
+        padding: 6px 16px;
+        font-size: 14px;
+        color: $graphite;
+    }
+}
+
+// ---------- Proof / testimonial ----------
+.proof {
+    background-color: $secondary;
+    position: relative;
+    overflow: hidden;
+
+    .proof-ring {
+        position: absolute;
+        border: 1px solid rgba($primary, 0.18);
+        border-radius: 50%;
+        aspect-ratio: 1;
+    }
+
+    .proof-ring-1 {
+        width: 900px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .proof-ring-2 {
+        width: 620px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .proof-quote {
+        max-width: 26ch;
+    }
+
+    .proof-mark {
+        line-height: 1;
+        color: var(--bs-primary);
+    }
+
+    .stat-inline {
+        font-weight: 800;
+        color: var(--bs-primary);
+    }
+}
+
+// ---------- FAQ ----------
+.faq {
+    .accordion-button {
+        font-size: clamp(20px, 2.4vw, 28px);
+    }
+}
+
+// ---------- Contact ----------
+.contact-cta {
+    background-color: $dark;
+
+    .form-control {
+        background: transparent;
+        border-width: 0 0 1px 0;
+        border-color: rgba($white, 0.25) !important;
+        color: $white;
+        font-size: 18px;
+        padding-block: 16px;
+
+        &::placeholder {
+            color: rgba($white, 0.45);
+        }
+
+        &:focus {
+            border-color: var(--bs-primary) !important;
+            box-shadow: none;
+        }
+    }
+}
